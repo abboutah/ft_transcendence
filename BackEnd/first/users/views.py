@@ -1,8 +1,9 @@
 from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy 
 from django.http import HttpResponseRedirect
 from django.contrib import messages
+from django.contrib.auth.models import User
 # from rest_framework.response import Response
 # from rest_framework.decorators import api_view
 # from .models import api
@@ -82,6 +83,13 @@ def profile(request):
         profile_form = UpdateProfileForm(instance=request.user.profile)
 
     return render(request, 'editprofile.html', {'user_form': user_form, 'profile_form': profile_form})
+
+@login_required(login_url='login')
+def view_profile(request, username):
+    user = get_object_or_404(User, username=username) #if user doesn't exist it raises 404
+    profile = Profile.objects.get(user=user) # retrieve profile
+    return render(request, 'view_profile.html', {'profile': profile})
+
 # @api_view(['GET'])  #display the api
 # def apix(request):
 #     Api = api.objects.all() #retrieve all the data from the database 

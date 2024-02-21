@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <h1>Profile of  {{ profile.user.username }}</h1>
+    <ul>
+        <img class="rounded-circle account-img" src="{{ profile.avatar.url }} " style="cursor: pointer;"/>
+        <li>Username: {{ profile.user.username }}</li>
+        <li>Nickname: {{ profile.nickname }}</li>
+        <li>First name: {{ profile.user.first_name }}</li>
+        <li>Last name: {{ profile.user.last_name }}</li>
+        <li>Email: {{ profile.user.email }}</li>
+        <li>Bio: {{ profile.bio }}</li>
+    </ul>
+{% endblock %}

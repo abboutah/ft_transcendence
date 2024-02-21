@@ -10,9 +10,11 @@ class Profile(models.Model):
     #related to user, if the user deleted then delete his profile
     user = models.OneToOneField(User, on_delete=models.CASCADE) 
     #the default image to use for a user if they don't upload one and the directory where images get uploaded
-    avatar = models.ImageField(default='default.jpg', upload_to='profile_images') 
-    bio = models.TextField() #text
-    nickname = models.TextField(max_length=100, null=True)
+    avatar = models.ImageField(default='default.jpg', upload_to='profile_images')
+    #blank indicate that a field can be left blank in forms
+    #null allow field to have NULL in the database
+    bio = models.TextField(blank=True, null=True) #text
+    nickname = models.TextField(max_length=100, blank=True, null=True)
     first_name = models.CharField(max_length=100, blank=True, null=True)
     last_name = models.CharField(max_length=100, blank=True, null=True)
     #convert an object into its string, so whenever we print out the profile of user, it will display his username
