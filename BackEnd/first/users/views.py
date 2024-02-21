@@ -12,16 +12,18 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm 
 from django.views import generic
 from .profile import UpdateUserForm, UpdateProfileForm
+from .models import Profile
 
 
 
 # Create your views here.
 def index(request):
+    profile = Profile.objects.get(user=request.user) #querying the database to retrieve a single object from Profile model
     # If no user is signed in, return to login page:
     if not request.user.is_authenticated:
         #return HttpResponseRedirect(reverse("login"))
         return render(request, "index.html")
-    return render(request, "user.html")
+    return render(request, "user.html" ,{'profile': profile})
 
 def login_view(request):
     if request.method == "POST":
