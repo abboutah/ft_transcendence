@@ -18,12 +18,12 @@ from .models import Profile
 
 # Create your views here.
 def index(request):
-    profile = Profile.objects.get(user=request.user) #querying the database to retrieve a single object from Profile model
     # If no user is signed in, return to login page:
     if not request.user.is_authenticated:
         #return HttpResponseRedirect(reverse("login"))
         return render(request, "index.html")
-    return render(request, "user.html" ,{'profile': profile})
+    profile = Profile.objects.get(user=request.user) #querying the database to retrieve a single object from Profile model
+    return render(request, "profile.html" ,{'profile': profile})
 
 def login_view(request):
     if request.method == "POST":
@@ -76,12 +76,12 @@ def profile(request):
             user_form.save()
             profile_form.save()
             messages.success(request, 'Your profile is updated successfully')
-            return redirect(to='profile')
+            return redirect(to='editprofile')
     else:
         user_form = UpdateUserForm(instance=request.user)
         profile_form = UpdateProfileForm(instance=request.user.profile)
 
-    return render(request, 'profile.html', {'user_form': user_form, 'profile_form': profile_form})
+    return render(request, 'editprofile.html', {'user_form': user_form, 'profile_form': profile_form})
 # @api_view(['GET'])  #display the api
 # def apix(request):
 #     Api = api.objects.all() #retrieve all the data from the database 

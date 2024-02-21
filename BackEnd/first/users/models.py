@@ -12,7 +12,9 @@ class Profile(models.Model):
     #the default image to use for a user if they don't upload one and the directory where images get uploaded
     avatar = models.ImageField(default='default.jpg', upload_to='profile_images') 
     bio = models.TextField() #text
-    nickname = models.TextField(null=True)
+    nickname = models.TextField(max_length=100, null=True)
+    first_name = models.CharField(max_length=100, blank=True, null=True)
+    last_name = models.CharField(max_length=100, blank=True, null=True)
     #convert an object into its string, so whenever we print out the profile of user, it will display his username
     def __str__(self):
         return self.user.username
