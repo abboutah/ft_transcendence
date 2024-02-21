@@ -1,17 +1,10 @@
 from django.db import models
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
 from PIL import Image
  
 
 # Create your models here.
-class SignupForm(UserCreationForm):
-    # Configuration
-    class Meta:
-        model = User
-        fields = ['username', 'password1', 'password2']
-
 class Profile(models.Model):
     #one to one relationship, one record in a table is associated with one and only one record in another table using foreign key
     #related to user, if the user deleted then delete his profile

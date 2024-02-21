@@ -37,8 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #'django.contrib.postgres',
     'home',
     'users',
+
     #'Pillow'
     # 'rest_framework',
 ]
@@ -82,11 +84,11 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
         # 'ENGINE': 'django.db.backends.postgresql',
-        # 'NAME': 'abboutah', 
-        # 'USER': 'admin',
-        # 'PASSWORD': 'admin',
+        # 'NAME': 'project', 
+        # 'USER': 'user',
+        # 'PASSWORD': 'user1',
         # 'HOST': 'localhost', 
-        # 'PORT': '5432'
+        # 'PORT': '5431'
     }
 }
 

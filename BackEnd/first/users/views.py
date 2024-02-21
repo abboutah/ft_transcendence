@@ -6,7 +6,7 @@ from django.contrib import messages
 # from rest_framework.response import Response
 # from rest_framework.decorators import api_view
 # from .models import api
-from .models import SignupForm 
+from .profile import SignupForm 
 # from .serializer import apiSerializer, SignupForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm 
@@ -43,6 +43,7 @@ def login_view(request):
             })
     return render(request, "login.html")
 
+@login_required(login_url='login')
 def logout_view(request):
     logout(request)
     return render(request, "login.html", {
@@ -51,19 +52,19 @@ def logout_view(request):
 
 def user_signup(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST) #a built-in Django form specifically designed for user registration.
+        form = SignupForm(request.POST)
         if form.is_valid():
             form.save() #sve user to the Database
             username = form.cleaned_data.get('username') # Get the username that is submitted
             messages.success(request, f'Account created for {username}!') # Show sucess message 
             return redirect('login') #redirect to login
     else: #GET method
-        form = UserCreationForm() #create new instance 
+        form = SignupForm() #create new instance 
     #print(form)
     return render(request, 'signup.html', {'form': form}) #render signup html
 
 
-@login_required #limit acces to logged in users, it will redirect the user to login url
+@login_required(login_url='login') #limit acces to logged in users, it will redirect the user to login url
 def profile(request):
     if request.method == 'POST':
         user_form = UpdateUserForm(request.POST, instance=request.user)
