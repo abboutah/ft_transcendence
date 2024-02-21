@@ -1,6 +1,0 @@
-curl -F grant_type=authorization_code \
--F client_id=u-s4t2ud-d55c8602909a6a825892aed5b2d44dea111fc20f57a1838015e3d0c7c7eee3d8 \
--F client_secret=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 \
--F code=86268e6b6a52dc9b7ca7567d5f24b1c100e2d82a68370c58e76d237bd6e7ee00 \
--F redirect_uri=http%3A%2F%2F127.0.0.1%3A8000%2F \
--X POST https://api.intra.42.fr/oauth/token
