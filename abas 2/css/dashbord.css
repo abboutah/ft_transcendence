@@ -1,0 +1,52 @@
+/* Style for dashboard content */
+.dashboard-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.dashboard-content h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.dashboard-content h2 {
+    font-size: 20px;
+    margin-top: 30px;
+}
+
+.dashboard-content p {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.dashboard-content ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.dashboard-content li {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Style for statistics section */
+.statistics-section {
+    margin-bottom: 30px;
+}
+
+.statistics-section p {
+    margin-bottom: 10px;
+}
+
+/* Style for recent activity section */
+.recent-activity-section {
+    margin-top: 20px;
+}
+
+.recent-activity-section ul {
+    padding-left: 20px;
+}
+
+.recent-activity-section li {
+    margin-bottom: 10px;
+}

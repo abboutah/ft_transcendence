@@ -1,0 +1,19 @@
+body{
+    background-color: #231E39 !important;
+}
+
+.container{
+    width: 80%;
+    max-height: 80vh;
+    max-width: 600px;
+    margin: 100px auto;
+    padding: 20px;
+}
+
+.button-previous{
+	position: absolute;
+	top: 30px;
+	left: 30px;
+	background-color: #03BFCB;
+    border-radius: 10%;
+}

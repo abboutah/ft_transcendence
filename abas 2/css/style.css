@@ -1,0 +1,17 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #231E39;
+}
+
+.content {
+    margin-left: 200px;
+    padding: 20px;
+
+}
+
+/* Initially hide the sidebar */
+.sidebar {
+    display: none;
+}

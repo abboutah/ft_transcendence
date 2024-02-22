@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="css/profile.css">
+</head>
+<body>
+
+    <div class="parent-page">
+
+   
+    <div class="parent-profile">
+    <div class="card-container">
+        <div class="profile-item">
+            <button class="btn-profile">
+                <img class="round" src="/asssests/avatar-homme.png" alt="user" />
+            </button>
+                <img  
+                onclick="window.location.href = 'editeProfileBootstrap.html'"
+                class="edit-profile"
+                src="https://cdn3.iconfinder.com/data/icons/feather-5/24/edit-512.png" alt="edit" />
+        </div>
+        <h3>achaak abass</h3>
+        <div class="buttons">
+            <button class="primary">
+                Tornament
+            </button>
+            <button
+            onclick="window.location.href = 'invite.html'"
+            class="primary ghost">
+                invite to play
+            </button>
+        </div>
+        <div class="skills">
+            <h2>Scoor</h2>
+            <ul>
+                <li>UI / UX</li>
+                <li>Front End Development</li>
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+                <li>React</li>
+                <li>Node</li>
+            </ul>
+        </div>
+    </div>
+    <!-- <button 
+    onclick="
+    goBack()
+    "
+    class="button-previous">
+        <img src="https://img.icons8.com/ios/50/000000/circled-left-2.png" alt="previous" />
+    </button> -->
+    <button 
+    onclick="removeItemFromLocalStorage()"
+    class="button-logout">
+        Logout
+    </button>
+</div>
+</div>
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+    function removeItemFromLocalStorage() {
+        localStorage.removeItem("isLoggedIn");
+        window.location.href = "index.html";
+    }
+</script>
+
+</body>
+</html>
