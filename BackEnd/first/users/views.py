@@ -14,6 +14,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.views import generic
 from .profile import UpdateUserForm, UpdateProfileForm
 from .models import Profile
+from django.db import models
+
 
 
 
@@ -87,7 +89,7 @@ def profile(request):
 @login_required(login_url='login')
 def view_profile(request, username):
     user = get_object_or_404(User, username=username) #if user doesn't exist it raises 404
-    profile = Profile.objects.get(user=user) # retrieve profile
+    profile = Profile.objects.get(user=user) # retrieve profile 
     return render(request, 'view_profile.html', {'profile': profile})
 
 # @api_view(['GET'])  #display the api

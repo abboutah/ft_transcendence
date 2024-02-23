@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AbstractUser
 from django import forms
 from PIL import Image
  
@@ -30,6 +30,7 @@ class Profile(models.Model):
             new_img = (100, 100)
             img.thumbnail(new_img)
             img.save(self.avatar.path)
+
 # class api(models.Model):
 #     name = models.CharField(max_length=200)
 #     description = models.CharField(max_length=500)
