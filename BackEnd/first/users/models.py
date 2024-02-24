@@ -20,6 +20,7 @@ class Profile(models.Model):
     #each record of the first model is related to many records of the second model and also 
     #each record of the second model is related to many records of the first model. 
     friends = models.ManyToManyField(User, related_name='friends', blank=True)
+    is_online = models.BooleanField(default=False)
     #related_name is an attribute that can be used to specify the name of the reverse relation in Django models
     #https://djangocentral.com/understanding-related-name-in-django-models/
     #convert an object into its string, so whenever we print out the profile of user, it will display his username
