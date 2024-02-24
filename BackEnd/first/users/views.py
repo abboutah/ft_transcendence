@@ -17,11 +17,14 @@ from .models import Profile
 from django.db import models
 
 
-is_online = False
+
 
 # Create your views here.
 def index(request):
     # If no user is signed in, return to login page:
+    if "is_online" not in request.session:
+        # If not, create a new list
+        request.session["is_online"] = False
     if not request.user.is_authenticated:
         #return HttpResponseRedirect(reverse("login"))
         return render(request, "index.html")
@@ -29,7 +32,6 @@ def index(request):
     return render(request, "profile.html" ,{'profile': profile})
 
 def login_view(request):
-    global is_online
     if request.method == "POST":
         # Accessing username and password from form data
         username = request.POST["username"]
@@ -41,7 +43,7 @@ def login_view(request):
         # If user object is returned, log in and route to index page:
         if user:
             login(request, user)
-            is_online = True
+            request.session["is_online"] = True
             return HttpResponseRedirect(reverse("index"))
         # Otherwise, return login page again with new context
         else:
@@ -52,9 +54,8 @@ def login_view(request):
 
 @login_required(login_url='login')
 def logout_view(request):
-    global is_online
     logout(request)
-    is_online = False
+    request.session["is_online"] = False
     return render(request, "login.html", {
                 "message": "Logged Out"
             })
@@ -92,10 +93,43 @@ def profile(request):
 
 @login_required(login_url='login')
 def view_profile(request, username):
-    global is_online
+    useru = request.user.username
+    action = 'add_friend'
+    is_online = request.session.get('is_online', 'False')
     user = get_object_or_404(User, username=username) #if user doesn't exist it raises 404
     profile = Profile.objects.get(user=user) # retrieve profile 
-    return render(request, 'view_profile.html', {'profile': profile, 'is_online':is_online})
+    # if request.method == 'POST':
+    #     # action = request.POST.get('action')  # Assuming you have a hidden input in your form indicating the action
+    #     if user_id in profile.friends.id:
+    #         action = 'add_friend'
+    #     else:
+    #         action = 'remove_friend'
+    #     if action == 'add_friend':
+    #         profile.friends.add(request.user)
+    #         request.user.profile.friends.add(profile.user)
+    #         messages.success(request, f'{profile.user.username} added to your friends list!')
+    #     elif action == 'remove_friend':
+    #         profile.friends.remove(request.user)
+    #         request.user.profile.friends.remove(profile.user)
+    #         messages.success(request, f'{profile.user.username} removed from your friends list!')
+    if request.method == 'POST':
+        if request.user in profile.friends.all():
+            action = 'remove_friend'
+            profile.friends.remove(request.user)
+            request.user.profile.friends.remove(profile.user)
+            messages.success(request, f'{profile.user.username} removed from your friends list!')
+        else:
+            action = 'add_friend'
+            profile.friends.add(request.user)
+            request.user.profile.friends.add(profile.user)
+            messages.success(request, f'{profile.user.username} added to your friends list!')
+
+    elif request.user in profile.friends.all():
+        action = 'remove_friend'
+    else:
+        action = 'add_friend'
+    return render(request, 'view_profile.html', {'profile': profile, 'is_online':is_online, 'useru':useru, 'action': action})
+
 
 # @api_view(['GET'])  #display the api
 # def apix(request):

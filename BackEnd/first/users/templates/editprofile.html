@@ -33,16 +33,6 @@
                             {{ profile_form.nickname }}
                         <label class="small mb-1">Email:</label>
                             {{ user_form.email }}
-                        <!-- <select class="small mb-1">Friends:</select>
-                            {{ profile_form.friends }} -->
-                        <label class="small mb-1">Add/Remove Friends:</label>
-                            <select name="friends" multiple class="form-control"> 
-                                {% for friend in profile_form.fields.friends.queryset %}
-                                    {% if friend.id != user_id %}
-                                        <option value="{{ friend.id }}">{{ friend.username }}</option>
-                                    {% endif %}
-                                {% endfor %}
-                            </select>
                         </div>
                     <div class="form-group">
                         <hr>

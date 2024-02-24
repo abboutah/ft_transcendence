@@ -20,8 +20,26 @@
         <li>Friends: {{ profile.get_number_of_friends }}</li>
         {% for friend in profile.get_friends %}
         <li>List of friends: 
-            {{ friend }}            
+            {{ friend }}      
         </li>
         {% endfor %}
+        <form method="post">
+            {% csrf_token %}
+            {% if useru != profile.user.username %}
+            <input type="hidden" name="action" value="{{ action }}">
+            <button type="submit">
+                {% if action == 'remove_friend' %}
+                    Remove Friend
+                {% else %}
+                    Add Friend
+                {% endif %}
+            {% endif %}
+                <!-- {% if user_id == profile.id in profile.get_friends%} -->
+                <!-- {% else %}
+                    <input type="hidden" name="action" value="add_friend">
+                    <button type="submit">Add Friend</button>
+                {% endif %} -->
+
+        </form>
     </ul>
 {% endblock %}
