@@ -10,5 +10,11 @@
         <li>Last name: {{ profile.user.last_name }}</li>
         <li>Email: {{ profile.user.email }}</li>
         <li>Bio: {{ profile.bio }}</li>
+        <li>Friends: {{ profile.get_number_of_friends }}</li>
+        {% for friend in profile.get_friends %}
+        <li>List of friends: 
+            {{ friend }}            
+        </li>
+        {% endfor %}
     </ul>
 {% endblock %}

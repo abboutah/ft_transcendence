@@ -17,6 +17,11 @@ class Profile(models.Model):
     nickname = models.TextField(max_length=100, blank=True, null=True)
     first_name = models.CharField(max_length=100, blank=True, null=True)
     last_name = models.CharField(max_length=100, blank=True, null=True)
+    #each record of the first model is related to many records of the second model and also 
+    #each record of the second model is related to many records of the first model. 
+    friends = models.ManyToManyField(User, related_name='friends', blank=True)
+    #related_name is an attribute that can be used to specify the name of the reverse relation in Django models
+    #https://djangocentral.com/understanding-related-name-in-django-models/
     #convert an object into its string, so whenever we print out the profile of user, it will display his username
     def __str__(self):
         return self.user.username
@@ -31,9 +36,23 @@ class Profile(models.Model):
             img.thumbnail(new_img)
             img.save(self.avatar.path)
 
+    def get_friends(self):
+        return self.friends.all()
+    
+    def get_number_of_friends(self):
+        return self.friends.all().count()
+
+    # STATUS_CHOICES = (
+    #     ('send', 'send'),
+    #     ('accepted', 'accepted'),
+    # )
+
 # class api(models.Model):
 #     name = models.CharField(max_length=200)
 #     description = models.CharField(max_length=500)
 
-
+# class relationship(models.Model):
+#     sender = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='sender')
+#     receiver = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='receiver')
+#     status = models.CharField(max_length=8, choices=STATUS_CHOICES)
 

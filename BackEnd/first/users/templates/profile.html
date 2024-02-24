@@ -10,6 +10,12 @@
         <li>Last name: {{ request.user.last_name }}</li>
         <li>Email: {{ request.user.email }}</li>
         <li>Bio: {{ profile.bio }}</li>
+        <li>Friends: {{ profile.get_number_of_friends }}</li>
+        {% for friend in profile.get_friends %}
+        <li>List of friends: 
+            {{ friend }}            
+        </li>
+        {% endfor %}
     </ul>
     
     <a href="{% url 'logout' %}">Log Out</a>

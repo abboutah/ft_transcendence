@@ -26,6 +26,7 @@ class UpdateProfileForm(forms.ModelForm):
     avatar = forms.ImageField(required=False,widget=forms.FileInput(attrs={'class': 'form-control-file'}))
     bio = forms.CharField(required=False,widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5}))
     nickname = forms.CharField(required=False,max_length=100,widget=forms.TextInput(attrs={'class': 'form-control'}))
+    # friends = frosm.
     class Meta:
         model = Profile
         fields = ['avatar', 'nickname', 'bio']
