@@ -37,10 +37,10 @@ class Profile(models.Model):
             img.save(self.avatar.path)
 
     def get_friends(self):
-        return self.friends.all()
+        return self.friends.all().exclude(id=self.user.id)
     
     def get_number_of_friends(self):
-        return self.friends.all().count()
+        return self.get_friends().count()
 
     # STATUS_CHOICES = (
     #     ('send', 'send'),

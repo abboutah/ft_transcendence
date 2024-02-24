@@ -1,0 +1,15 @@
+ca-certificates
+cmake
+gettext
+go
+icu4c
+krb5
+lz4
+openssl@3
+pkg-config
+postgresql@14
+postgresql@15
+postgresql@16
+readline
+xz
+zstd

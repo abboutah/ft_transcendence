@@ -71,10 +71,10 @@ def user_signup(request):
 
 @login_required(login_url='login') #limit acces to logged in users, it will redirect the user to login url
 def profile(request):
+    user_id = request.user.id
     if request.method == 'POST':
         user_form = UpdateUserForm(request.POST, instance=request.user)
         profile_form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.profile)
-
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
@@ -84,7 +84,7 @@ def profile(request):
         user_form = UpdateUserForm(instance=request.user)
         profile_form = UpdateProfileForm(instance=request.user.profile)
 
-    return render(request, 'editprofile.html', {'user_form': user_form, 'profile_form': profile_form})
+    return render(request, 'editprofile.html', {'user_form': user_form, 'profile_form': profile_form, 'user_id':user_id})
 
 @login_required(login_url='login')
 def view_profile(request, username):

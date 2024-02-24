@@ -26,10 +26,10 @@ class UpdateProfileForm(forms.ModelForm):
     avatar = forms.ImageField(required=False,widget=forms.FileInput(attrs={'class': 'form-control-file'}))
     bio = forms.CharField(required=False,widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5}))
     nickname = forms.CharField(required=False,max_length=100,widget=forms.TextInput(attrs={'class': 'form-control'}))
-    # friends = frosm.
+    friends = forms.ModelMultipleChoiceField(queryset=User.objects.all(), required=False, widget=forms.SelectMultiple(attrs={'class': 'form-control'}))
     class Meta:
         model = Profile
-        fields = ['avatar', 'nickname', 'bio']
+        fields = ['avatar', 'nickname', 'bio', 'friends']
 
 
 class SignupForm(UserCreationForm):
