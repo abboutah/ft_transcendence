@@ -150,7 +150,10 @@ def view_profile(request, username):
         # 'allu': allu
         })
 
-
+@login_required(login_url='login')
+def list_users(request):
+    users = User.objects.all()
+    return render(request, 'ausers.html', {'users': users})
 # @api_view(['GET'])  #display the api
 # def apix(request):
 #     Api = api.objects.all() #retrieve all the data from the database 

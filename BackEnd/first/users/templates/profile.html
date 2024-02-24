@@ -3,7 +3,7 @@
 {% block body %}
     <h1>Welcome, {{ request.user.username }}</h1>
     <form action="">
-        <input type="text" name="search" placeholder="Search by title" >
+        <input type="search" name="search" placeholder="Search by title" >
         <input type="submit" value="Search">
     </form>
     <ul>
@@ -25,4 +25,5 @@
     <a href="{% url 'logout' %}">Log Out</a>
     <a href="{% url 'editprofile' %}">Edit Profile</a>
     <a href="/profile/{{request.user.username}}">View My profile</a>
+    <a href="{% url 'list_users' %}">All Users</a>
 {% endblock %}
