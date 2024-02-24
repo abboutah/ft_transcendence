@@ -2,6 +2,10 @@
 
 {% block body %}
     <h1>Welcome, {{ request.user.username }}</h1>
+    <form action="">
+        <input type="text" name="search" placeholder="Search by title" >
+        <input type="submit" value="Search">
+    </form>
     <ul>
         <img class="rounded-circle account-img" src="{{ profile.avatar.url }} " style="cursor: pointer;"/>
         <li>Username: {{ request.user.username }}</li>
@@ -13,12 +17,12 @@
         <li>Friends: {{ profile.get_number_of_friends }}</li>
         {% for friend in profile.get_friends %}
         <li>List of friends: 
-            {{ friend }}            
+            <a href="/profile/{{ friend }}">{{ friend }}</a>           
         </li>
         {% endfor %}
     </ul>
     
     <a href="{% url 'logout' %}">Log Out</a>
     <a href="{% url 'editprofile' %}">Edit Profile</a>
-    <a href="{}"
+    <a href="/profile/{{request.user.username}}">View My profile</a>
 {% endblock %}

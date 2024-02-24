@@ -29,7 +29,9 @@ def index(request):
         #return HttpResponseRedirect(reverse("login"))
         return render(request, "index.html")
     profile = Profile.objects.get(user=request.user) #querying the database to retrieve a single object from Profile model
-    return render(request, "profile.html" ,{'profile': profile})
+    return render(request, "profile.html" ,{
+        'profile': profile
+        })
 
 def login_view(request):
     if request.method == "POST":
@@ -73,11 +75,14 @@ def user_signup(request):
     else: #GET method
         form = SignupForm() #create new instance 
     #print(form)
-    return render(request, 'signup.html', {'form': form}) #render signup html
+    return render(request, 'signup.html', {
+        'form': form
+        }) #render signup html
 
 
 @login_required(login_url='login') #limit acces to logged in users, it will redirect the user to login url
 def profile(request):
+    # allu = request.user.objects.all()
     user_id = request.user.id
     if request.method == 'POST':
         user_form = UpdateUserForm(request.POST, instance=request.user)
@@ -91,10 +96,16 @@ def profile(request):
         user_form = UpdateUserForm(instance=request.user)
         profile_form = UpdateProfileForm(instance=request.user.profile)
 
-    return render(request, 'editprofile.html', {'user_form': user_form, 'profile_form': profile_form, 'user_id':user_id})
+    return render(request, 'editprofile.html', {
+        'user_form': user_form,
+        'profile_form': profile_form,
+        'user_id':user_id,
+        # 'allu': allu
+          })
 
 @login_required(login_url='login')
 def view_profile(request, username):
+    # allu = request.user.objects.all()
     useru = request.user.username
     action = 'add_friend'
     #is_online = request.session.get('is_online', 'False')
@@ -131,7 +142,13 @@ def view_profile(request, username):
         action = 'remove_friend'
     else:
         action = 'add_friend'
-    return render(request, 'view_profile.html', {'profile': profile, 'online':online, 'useru':useru, 'action': action})
+    return render(request, 'view_profile.html', {
+        'profile': profile,
+        'online':online,
+        'useru':useru,
+        'action': action,
+        # 'allu': allu
+        })
 
 
 # @api_view(['GET'])  #display the api

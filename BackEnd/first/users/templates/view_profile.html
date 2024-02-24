@@ -20,7 +20,7 @@
         <li>Friends: {{ profile.get_number_of_friends }}</li>
         {% for friend in profile.get_friends %}
         <li>List of friends: 
-            {{ friend }}      
+            <a href="/profile/{{friend}}">{{ friend }}</a> 
         </li>
         {% endfor %}
         <form method="post">
