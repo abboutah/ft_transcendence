@@ -17,7 +17,7 @@ from .models import Profile
 from django.db import models
 
 
-
+is_online = False
 
 # Create your views here.
 def index(request):
@@ -29,6 +29,7 @@ def index(request):
     return render(request, "profile.html" ,{'profile': profile})
 
 def login_view(request):
+    global is_online
     if request.method == "POST":
         # Accessing username and password from form data
         username = request.POST["username"]
@@ -40,6 +41,7 @@ def login_view(request):
         # If user object is returned, log in and route to index page:
         if user:
             login(request, user)
+            is_online = True
             return HttpResponseRedirect(reverse("index"))
         # Otherwise, return login page again with new context
         else:
@@ -50,7 +52,9 @@ def login_view(request):
 
 @login_required(login_url='login')
 def logout_view(request):
+    global is_online
     logout(request)
+    is_online = False
     return render(request, "login.html", {
                 "message": "Logged Out"
             })
@@ -88,9 +92,10 @@ def profile(request):
 
 @login_required(login_url='login')
 def view_profile(request, username):
+    global is_online
     user = get_object_or_404(User, username=username) #if user doesn't exist it raises 404
     profile = Profile.objects.get(user=user) # retrieve profile 
-    return render(request, 'view_profile.html', {'profile': profile})
+    return render(request, 'view_profile.html', {'profile': profile, 'is_online':is_online})
 
 # @api_view(['GET'])  #display the api
 # def apix(request):

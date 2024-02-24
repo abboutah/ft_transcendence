@@ -4,6 +4,13 @@
     <h1>Profile of  {{ profile.user.username }}</h1>
     <ul>
         <img class="rounded-circle account-img" src="{{ profile.avatar.url }} " style="cursor: pointer;"/>
+        <li>Status:
+            {% if is_online %}
+            Online  
+            {% else %}
+            Offline 
+            {% endif %}
+        </li>
         <li>Username: {{ profile.user.username }}</li>
         <li>Nickname: {{ profile.nickname }}</li>
         <li>First name: {{ profile.user.first_name }}</li>
