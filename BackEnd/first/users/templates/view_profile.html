@@ -23,6 +23,10 @@
             <a href="/profile/{{friend}}">{{ friend }}</a> 
         </li>
         {% endfor %}
+        <li>Matches: {{profile.user.matches}}</li>
+        <li>Wins: {{profile.wins}}</li>
+        <li>Losses: {{profile.losses}}</li>
+        <li>Stats: Wins:{{profile.get_wstats|floatformat:2}}% Losses: {{profile.get_lstats|floatformat:2}}%</li>
         <form method="post">
             {% csrf_token %}
             {% if useru != profile.user.username %}
@@ -34,12 +38,22 @@
                     Add Friend
                 {% endif %}
             {% endif %}
-                <!-- {% if user_id == profile.id in profile.get_friends%} -->
-                <!-- {% else %}
-                    <input type="hidden" name="action" value="add_friend">
-                    <button type="submit">Add Friend</button>
+            <!-- {% if user_id == profile.id in profile.get_friends%} -->
+            <!-- {% else %}
+                <input type="hidden" name="action" value="add_friend">
+                <button type="submit">Add Friend</button>
                 {% endif %} -->
+                
+            </form>
+        </ul>
 
-        </form>
-    </ul>
+        {% if messages %}
+        <div class="messages">
+        {% for message in messages %}
+            <div class="alert {% if message.tags %}alert-{{ message.tags }}"{% endif %}>
+                {{ message }}
+            </div>
+        {% endfor %}
+        </div>
+        {% endif %}
 {% endblock %}

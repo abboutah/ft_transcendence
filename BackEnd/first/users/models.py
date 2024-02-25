@@ -21,6 +21,9 @@ class Profile(models.Model):
     #each record of the second model is related to many records of the first model. 
     friends = models.ManyToManyField(User, related_name='friends', blank=True)
     is_online = models.BooleanField(default=False)
+    matches = models.IntegerField(blank=True, default=0)
+    wins = models.IntegerField(blank=True, default=0)
+    losses = models.IntegerField(blank=True, default=0)
     #related_name is an attribute that can be used to specify the name of the reverse relation in Django models
     #https://djangocentral.com/understanding-related-name-in-django-models/
     #convert an object into its string, so whenever we print out the profile of user, it will display his username
@@ -42,6 +45,15 @@ class Profile(models.Model):
     
     def get_number_of_friends(self):
         return self.get_friends().count()
+    def get_wstats(self):
+        if self.matches == 0:
+            return 0
+        return (self.wins/self.matches) * 100
+    def get_lstats(self):
+        if self.matches == 0:
+            return 0
+        return (self.losses/self.matches) * 100
+    
 
     # STATUS_CHOICES = (
     #     ('send', 'send'),

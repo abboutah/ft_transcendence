@@ -15,6 +15,10 @@
         <li>Email: {{ request.user.email }}</li>
         <li>Bio: {{ profile.bio }}</li>
         <li>Friends: {{ profile.get_number_of_friends }}</li>
+        <li>Matches: {{profile.user.matches}}</li>
+        <li>Wins: {{profile.wins}}</li>
+        <li>Losses: {{profile.losses}}</li>
+        <li>Stats: Wins:{{profile.get_wstats|floatformat:2}}% Losses: {{profile.get_lstats|floatformat:2}}%</li>
         {% for friend in profile.get_friends %}
         <li>List of friends: 
             <a href="/profile/{{ friend }}">{{ friend }}</a>           

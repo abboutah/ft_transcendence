@@ -31,6 +31,12 @@
                         <br><br>
                         <label class="small mb-1">Nickname:</label>
                             {{ profile_form.nickname }}
+                            <label class="small mb-1">matches:</label>
+                            {{ profile_form.matches }}
+                            <label class="small mb-1">wins:</label>
+                                {{ profile_form.wins }}
+                        <label class="small mb-1">losses:</label>
+                            {{ profile_form.losses }}
                         <label class="small mb-1">Email:</label>
                             {{ user_form.email }}
                         </div>
@@ -47,5 +53,14 @@
             <button type="reset" class="btn btn-dark btn-lg">Reset</button>
             <a href={% url 'index' %}>View Profile</a>
         </form>
+        {% if messages %}
+        <div class="messages">
+        {% for message in messages %}
+            <div class="alert {% if message.tags %}alert-{{ message.tags }}"{% endif %}>
+                {{ message }}
+            </div>
+        {% endfor %}
+        </div>
+        {% endif %}
     </div>
 {% endblock body %}

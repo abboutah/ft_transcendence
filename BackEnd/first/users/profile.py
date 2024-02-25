@@ -26,9 +26,12 @@ class UpdateProfileForm(forms.ModelForm):
     avatar = forms.ImageField(required=False,widget=forms.FileInput(attrs={'class': 'form-control-file'}))
     bio = forms.CharField(required=False,widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5}))
     nickname = forms.CharField(required=False,max_length=100,widget=forms.TextInput(attrs={'class': 'form-control'}))
+    matches = forms.IntegerField(required=False,widget=forms.NumberInput(attrs={'class': 'form-control'}))
+    losses = forms.IntegerField(required=False,widget=forms.NumberInput(attrs={'class': 'form-control'}))
+    wins = forms.IntegerField(required=False,widget=forms.NumberInput(attrs={'class': 'form-control'}))
     class Meta:
         model = Profile
-        fields = ['avatar', 'nickname', 'bio']
+        fields = ['avatar', 'nickname', 'bio', 'matches', 'wins', 'losses']
 
 
 class SignupForm(UserCreationForm):
