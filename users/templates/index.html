@@ -1,0 +1,9 @@
+{% if request.user.is_authenticated %}
+  <p>{{ request.user.username }}</p>
+  <a href="http://localhost:8000/logout">Logout</a>
+{% else %}
+  <a href="http://localhost:8000/login">Login</a>
+  <a href="http://localhost:8000/signup">Signup</a>
+{% endif %}
+
+<h1>Welcome!</h1>

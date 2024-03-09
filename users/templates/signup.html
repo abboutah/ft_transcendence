@@ -1,0 +1,8 @@
+<h1>Signup</h1>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Signup</button>
+    <a href="http://localhost:8000/login">Already have account?</a>
+    <a href="http://localhost:8000/intralogin">do you wanna login with your intra?</a>
+</form>
