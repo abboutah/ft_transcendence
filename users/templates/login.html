@@ -1,6 +1,6 @@
 <h1>Login</h1>
+<h2> {{ message }}<h2>
 <form method="POST">
-    {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Login</button>
     <a href="http://localhost:8000/signup">Dont have Account Create</a>

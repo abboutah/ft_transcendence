@@ -8,5 +8,4 @@ urlpatterns = [
     path('signup/', user_signup, name='signup'),
     path('callback/', callback, name='callback'),
     path('intralogin/', intralogin, name='intralogin'),
-
 ]

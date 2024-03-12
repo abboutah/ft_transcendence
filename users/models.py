@@ -30,6 +30,16 @@ class ProfileManager(BaseUserManager):
         user.is_superuser = True
         user.save(using=self._db)
         return user
+    def create_intrauser(self, email, password=None, **others):
+        user = self.create_user(
+            email,
+            password=password,
+            **others,
+        )
+        user.is_student = True
+        user.save(using=self._db)
+        return user
+
 
 class Profile(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=50, blank=True)
@@ -37,19 +47,17 @@ class Profile(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(max_length=50, blank=True)
     last_name = models.CharField(max_length=50, blank=True)
     email = models.EmailField(max_length=100, blank=True, unique=True)
-
+    # is_authenticated = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
     is_online = models.BooleanField(default=True)
-
     objects = ProfileManager()
-
+    is_student = models.BooleanField(default=False)
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["password", "username"]
     def __str__(self):
         return self.username
 
-`
 # class IntraProfileManager(BaseUserManager):
 
 #     def create_superuser(self,username, email, phone_number,password, **other_fields):
