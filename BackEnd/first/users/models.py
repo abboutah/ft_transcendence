@@ -57,6 +57,13 @@ class Profile(models.Model):
     def get_games(self):
         return Game.objects.filter(models.Q(player1=self.user) | models.Q(player2=self.user))
 
+    def calculate_wins_losses(self):
+        games = self.get_games()
+        self.wins = games.filter(winner=self.user).count()
+        self.losses = games.exclude(winner=self.user).count()
+        self.matches = games.count()
+        self.save()
+
     # STATUS_CHOICES = (
     #     ('send', 'send'),
     #     ('accepted', 'accepted'),

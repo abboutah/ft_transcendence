@@ -31,7 +31,7 @@ class UpdateProfileForm(forms.ModelForm):
     wins = forms.IntegerField(required=False,widget=forms.NumberInput(attrs={'class': 'form-control'}))
     class Meta:
         model = Profile
-        fields = ['avatar', 'nickname', 'bio', 'matches', 'wins', 'losses']
+        fields = ['avatar', 'nickname', 'bio']
 
 
 class SignupForm(UserCreationForm):

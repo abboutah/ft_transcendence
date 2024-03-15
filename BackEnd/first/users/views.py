@@ -154,6 +154,25 @@ def view_profile(request, username):
 def list_users(request):
     users = User.objects.all()
     return render(request, 'ausers.html', {'users': users})
+
+
+@login_required(login_url='login')
+def game(request):
+    # Logic to play a game and save it to the database
+    # Assuming you have retrieved the relevant players and saved the game
+    # game = Game.objects.create(player1=request.user, player2=opponent_user, winner=winner_user)
+    # Get the current user's profile
+    profile = request.user.profile
+    # Update wins, losses, and matches for the profile
+    profile.calculate_wins_losses()
+    # Get all users who are online and not friends
+    online_users = User.objects.filter(profile__is_online=True).exclude(id=request.user.id)
+    # Redirect to some page after playing the game
+    return render(request, 'game.html' , {
+        'online_users': online_users
+        })
+
+        
 # @api_view(['GET'])  #display the api
 # def apix(request):
 #     Api = api.objects.all() #retrieve all the data from the database 

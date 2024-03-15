@@ -31,12 +31,6 @@
                         <br><br>
                         <label class="small mb-1">Nickname:</label>
                             {{ profile_form.nickname }}
-                            <label class="small mb-1">matches:</label>
-                            {{ profile_form.matches }}
-                            <label class="small mb-1">wins:</label>
-                                {{ profile_form.wins }}
-                        <label class="small mb-1">losses:</label>
-                            {{ profile_form.losses }}
                         <label class="small mb-1">Email:</label>
                             {{ user_form.email }}
                         </div>
@@ -63,4 +57,5 @@
         </div>
         {% endif %}
     </div>
+    <a href="{% url 'logout' %}">Log Out</a>
 {% endblock body %}
