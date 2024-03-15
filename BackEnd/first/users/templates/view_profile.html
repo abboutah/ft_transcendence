@@ -24,6 +24,13 @@
         </li>
         {% endfor %}
         <li>Matches: {{profile.user.matches}}</li>
+        {% for game in profile.get_games %}
+            {% if game.winner.username == game.player1.username %}
+            <li>{{ game.player1.username }} 1 vs {{ game.player2.username }} 0 - {{ game.date|date:"F d, Y, H:i" }} </li>
+            {% else %}
+            <li>{{ game.player1.username }} 0 vs {{ game.player2.username }} 1 - {{ game.date|date:"F d, Y, H:i" }} </li>
+            {% endif %}
+        {% endfor %}
         <li>Wins: {{profile.wins}}</li>
         <li>Losses: {{profile.losses}}</li>
         <li>Stats: Wins:{{profile.get_wstats|floatformat:2}}% Losses: {{profile.get_lstats|floatformat:2}}%</li>

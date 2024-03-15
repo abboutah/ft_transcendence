@@ -53,7 +53,9 @@ class Profile(models.Model):
         if self.matches == 0:
             return 0
         return (self.losses/self.matches) * 100
-    
+
+    def get_games(self):
+        return Game.objects.filter(models.Q(player1=self.user) | models.Q(player2=self.user))
 
     # STATUS_CHOICES = (
     #     ('send', 'send'),
@@ -69,3 +71,12 @@ class Profile(models.Model):
 #     receiver = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='receiver')
 #     status = models.CharField(max_length=8, choices=STATUS_CHOICES)
 
+class Game(models.Model):
+    # ForeignKey is used to define a many-to-one relationship between two models.
+    #  When you define a ForeignKey field in a model,
+    #  it creates a column in the database table for that model,
+    #  which stores the primary key of the associated record in another table.
+    player1 = models.ForeignKey(User, related_name= 'player1', on_delete=models.CASCADE)
+    player2 = models.ForeignKey(User, related_name= 'player2', on_delete=models.CASCADE)
+    date = models.DateTimeField()
+    winner = models.ForeignKey(User, related_name='winner', on_delete=models.CASCADE)
