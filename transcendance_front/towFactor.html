@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming Website</title>
+    <link rel="stylesheet" href="towFactor.css">
+</head>
+
+<body>
+<div class="towFactor">
+<form action="/sessions/check-2fa" method="POST">
+    <div>
+      <label for="token">Please enter the code you were sent:</label>
+      <input type="text" name="token" id="token" />
+    </div>
+    <button class="btn_check_token" type="submit">Validate</button>
+  </form>
+</div>
+<button
+        class="button-previous"
+        onclick="goBack()">Go Back</button>
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+
+</body>

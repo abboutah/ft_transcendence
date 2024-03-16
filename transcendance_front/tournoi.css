@@ -1,0 +1,165 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height:100vh;
+    background-image: url('https://i.pinimg.com/originals/dd/d5/81/ddd581bc6e59626485053702c8ac2f4f.gif');
+    background-size: cover;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    background-position: center;
+}
+.container {
+    width: 420px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    color: #fff;
+    border-radius: 10px;
+    padding: 30px 40px;
+    
+
+    /* max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+}
+
+.button-previous{
+	position: absolute;
+	top: 30px;
+	left: 30px;
+	background-color: #03BFCB;
+
+    
+    border: 1px solid #03BFCB;
+    border-radius: 70px;
+    color: #231E39;
+    padding: 10px 25px;
+}
+
+.button-previous2{
+	position: absolute;
+	top: 30px;
+	left: 100px;
+	background-color: #03BFCB;
+
+    border: 1px solid #03BFCB;
+    border-radius: 70px;
+    color: #231E39;
+    padding: 10px 25px;
+}
+
+.button-logout{
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    background-color: #03BFCB;
+    border: 1px solid #03BFCB;
+    border-radius: 3px;            /*3px*/
+    color: #231E39;
+    /* font-family: Montserrat, sans-serif; */
+    font-weight: 500;
+    padding: 10px 25px;
+    /* cursor: pointer; */
+
+}
+
+h1, h2 {
+    text-align: center;
+    /* color: #333; */
+    color: #03BFCB;
+}
+form {
+    margin-top: 20px;
+}
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+.players-list {
+    margin-top: 20px;
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+li {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+.player-slot {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.player-slot img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+}
+.invite-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.invite-button:hover {
+    background-color: #0056b3;
+}
+#startGame {
+    display: none;
+    margin-top: 20px;
+}
+.online-players {
+    display: none;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+}
+.online-players li {
+    cursor: pointer;
+    padding: 5px;
+    transition: background-color 0.3s ease;
+}
+.online-players li:hover {
+    background-color: #f0f0f0;
+}

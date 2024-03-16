@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="tournoi.css">
+    <title>Tournament Setup</title>
+</head>
+<body>
+
+    <div class="GoBack_Logout">
+        <button
+        class="button-previous"
+        onclick="goBack()"><</button>
+        <button class="button-logout"
+        onclick="removeItemFromLocalStorage()">
+        Logout</button>
+    </div>
+
+
+
+    <div class="container">
+        <h1>Tournament Setup</h1>
+        <div class="player-slot">
+            <img src="/fils/image1.jpg" alt="Host Profile Picture">
+            <div class="invite-button">+</div>
+        </div>
+        <div id="playerSlots">
+        </div>
+        <button id="startGame">Start Game</button>
+        <ul class="online-players">
+            <li>User 1</li>
+            <li>User 2</li>
+            <li>User 3</li>
+            <li>User 4</li>
+            <li>User 5</li>
+            <!-- Add more online players here -->
+        </ul>
+    </div>
+
+    <script src="tournoi.js"></script>
+
+    <script>
+        function inviteUser() {
+            // logic to send invitation
+            alert("Invitation sent!");
+        }
+        function goBack() {
+            window.history.back();
+        }
+        function removeItemFromLocalStorage() {
+            localStorage.removeItem("isLoggedIn");
+            window.location.href = "index.html";
+        }
+    </script>
+</body>
+</html>
