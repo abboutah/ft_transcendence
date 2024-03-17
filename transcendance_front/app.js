@@ -77,3 +77,14 @@ function loadLoginComponent() {
 loadLoginComponent();
 
 
+
+
+
+
+
+
+// get the password and email from the form and store them in the local storage.
+// send a Post request with the values of email and password to the endpoint /login .
+
+
+

@@ -1,16 +1,15 @@
 document.addEventListener("DOMContentLoaded", function() {
     const playerSlots = document.getElementById("playerSlots");
     const startGameButton = document.getElementById("startGame");
-    const inviteButton = document.querySelector(".invite-button");
-    const onlinePlayersList = document.querySelector(".online-players");
-    const onlinePlayers = document.querySelectorAll(".online-players li");
+    const onlinePlayersList = document.querySelector(".online-players");  //just in case must be deleted if not used
+    const onlinePlayers = document.querySelectorAll(".online-players li");   //just in case must be deleted if not used
     let playersInvited = 0;
 
     function invitePlayer(playerName) {
         const slot = document.createElement("div");
         slot.classList.add("player-slot");
         const img = document.createElement("img");
-        img.src = "player.jpg"; // Path to default player image
+        img.src = "player.jpg"; // Path to the host player image
         img.alt = "Player Profile Picture";
         slot.appendChild(img);
         playerSlots.appendChild(slot);
@@ -18,28 +17,20 @@ document.addEventListener("DOMContentLoaded", function() {
         if (playersInvited === 3) {
             startGameButton.style.display = "block";
         }
-        if (playersInvited >= 1) {
-            inviteButton.style.display = "block"; // Keep the plus button visible after clicking
-        }
-        if (playersInvited >= 3) {
-            inviteButton.style.display = "none"; // Hide the plus button after reaching maximum players
-        }
     }
 
-    inviteButton.addEventListener("click", function() {
-        onlinePlayersList.style.display = "block";
-    });
-
-    onlinePlayers.forEach(function(player) {
-        player.addEventListener("click", function() {
-            const playerName = this.textContent;
-            invitePlayer(playerName);
-            onlinePlayersList.style.display = "none";
+    function addPlayersFromURL() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const players = urlParams.getAll("player");
+        players.forEach(function(player) {
+            invitePlayer(player);
         });
-    });
+    }
+
+    addPlayersFromURL(); // Add players when the page loads
 
     startGameButton.addEventListener("click", function() {
         alert("Game starting!");
-        // Add your game starting functionality here
+        // redirct l page dyal tournament
     });
 });

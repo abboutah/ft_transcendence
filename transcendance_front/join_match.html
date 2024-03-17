@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming Website</title>
+    <link rel="stylesheet" href="join_match.css">
+</head>
+
+<body>
+<div class="towFactor">
+    <form action="/sessions/check-2fa" method="POST">
+        <div>
+          <label for="token">Enter match code :</label>
+          <input type="text" name="token" id="token" />
+        </div>
+        <button class="btn_join_match" type="submit">Join Match</button>
+      </form>
+</div>
+<button
+        class="button-previous"
+        onclick="goBack()"><</button>
+        <button class="button-logout"
+        onclick="removeItemFromLocalStorage()">
+        Logout</button>
+<script>
+    function goBack() {
+        window.history.back();
+    }
+    function removeItemFromLocalStorage() {
+        localStorage.removeItem("isLoggedIn");
+        window.location.href = "index.html";
+    }
+</script>
+
+</body>
+
