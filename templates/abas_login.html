@@ -1,0 +1,53 @@
+<!-- login.html -->
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="wideth=device-width, initial-scale=1.0">
+    <title>Login Form in HTML and CSS </title>
+    <link rel="stylesheet" href="/static/css/abas_login.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <script>
+        function setItemToLocalStorage2() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            console.log(email)
+            console.log(password)
+            // Stocker le nom d'utilisateur et le mot de passe dans le localStorage
+            localStorage.setItem('email', email);
+            localStorage.setItem('password', password);
+        }
+    </script>
+    <div class="wrapper">
+        <form method="POST">
+            <h1>Login</h1>
+            {{ form }}
+            <div class="input-box">
+                <input type="text" id="email" placeholder="email" required>
+                <!-- <i class='bx bxs-user'></i> -->
+            </div>
+            <div class="input-box">
+                <input type="password" id="password" placeholder="password" required>
+                <!-- <i class='bx bxs-lock'></i> -->
+            </div>
+            <button type="submet" class="btn" onclick="setItemToLocalStorage2()">Login</button>
+        </form>
+        <div class="register-link">
+            <p>Don't have an account? <a href="/signup">Register</a></p>
+        </div>
+    </div>
+    <div class="wrapper">
+        <form id="login-form" action="/intralogin">
+            <button 
+            class="btn btn-secondary btn-block">Login with 42 Intra</button>
+        </form>
+    </div>
+</body>
+</html>

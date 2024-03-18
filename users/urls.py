@@ -1,5 +1,5 @@
 from django.urls import path
-from users.views import user_login, user_logout, user_signup, index, callback, intralogin
+from users.views import user_login, user_logout, user_signup, index, callback, intralogin, verifycode
 
 urlpatterns = [
     path('home/', index, name='home'),
@@ -8,4 +8,5 @@ urlpatterns = [
     path('signup/', user_signup, name='signup'),
     path('callback/', callback, name='callback'),
     path('intralogin/', intralogin, name='intralogin'),
+    path('api/optcode', verifycode),
 ]

@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 
 
 class LoginForm(forms.Form):
-    email = forms.EmailField(max_length=254)
+    email = forms.EmailField(max_length=254, widget=forms.EmailInput(attrs={'placeholder': 'Email', 'style': 'width: 100%;', 'class': 'input-box'}))
     password = forms.CharField(widget=forms.PasswordInput)
 
 
@@ -17,6 +17,9 @@ class SignupForm(UserCreationForm):
         if Profile.objects.filter(email=email).exists():
             return None
         return email
+
+class CodeForm(forms.Form):
+    code = forms.CharField(max_length=6)
 
 
 

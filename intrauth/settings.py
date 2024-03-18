@@ -16,7 +16,7 @@ from dotenv import load_dotenv
 from datetime import timedelta
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+print(BASE_DIR)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -59,7 +59,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS':  [
-                   BASE_DIR / "users/templates"],
+                   BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -71,7 +71,14 @@ TEMPLATES = [
         },
     },
 ]
+# route the path of the static files to the subdomain /static
+STATIC_URL = 'static/'
 
+# include the base dire of the css static files 
+STATICFILES_DIRS = [
+    BASE_DIR / 'static'
+]
+# APPEND_SLASH=False
 WSGI_APPLICATION = 'intrauth.wsgi.application'
 
 
@@ -133,7 +140,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -149,6 +155,10 @@ INTRA_REDIRECTION_URL = os.getenv('INTRA_REDIRECTION_URL')
 INTRA_ACCES_TOKEN_URL = os.getenv('INTRA_ACCES_TOKEN_URL')
 INTRA_AUTHORIZATION_URL = os.getenv('INTRA_AUTHORIZATION_URL')
 INTRA_TOKEN_INFO  = os.getenv('INTRA_TOKEN_INFO')
+EMAIL_PROVIDER_URL= os.getenv('EMAIL_PROVIDER_URL')
+EMAIL_PROVIDER_KEY= os.getenv('EMAIL_PROVIDER_KEY')
+MY_EMAIL = os.getenv('MY_EMAIL')
+MY_NAME = os.getenv('MY_NAME')
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
@@ -189,3 +199,10 @@ SIMPLE_JWT = {
     "SLIDING_TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainSlidingSerializer",
     "SLIDING_TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer",
 }
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'live.smtp.mailtrap.io'
+EMAIL_HOST_USER = 'api'
+EMAIL_HOST_PASSWORD = '92b509f573718c3d76f3a30d47722cf7'
+EMAIL_PORT = '587'
+
