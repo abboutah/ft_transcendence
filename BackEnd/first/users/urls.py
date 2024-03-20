@@ -12,6 +12,9 @@ urlpatterns = [
     path('editprofile/', views.profile, name='editprofile'),
     path('ausers/', views.list_users, name='list_users'),
     path('game/', views.game, name='game'),
+    path('redirecturi/', views.redirecturi, name='redirecturi'),
+    # path('intralogin', views.intralogin, name='intralogin')
+    # path('2FAe/', views.email_verification, name='email_verification')
     # path("apix", views.apix),
     # path("apip", views.apip)
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) #serve user-uploaded media files during development( when debug=True).

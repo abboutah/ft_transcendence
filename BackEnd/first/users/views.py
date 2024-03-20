@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy 
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib import messages
 from django.contrib.auth.models import User
 # from rest_framework.response import Response
@@ -15,8 +15,20 @@ from django.views import generic
 from .profile import UpdateUserForm, UpdateProfileForm
 from .models import Profile
 from django.db import models
+import pyotp
+from django.core.mail import send_mail
+from django.conf import settings
+import requests
+import json
 
-
+_DOMAIN = settings._DOMAIN
+INTRA_CLIENT_ID = settings.INTRA_CLIENT_ID
+INTRA_CLIENT_SECRET = settings.INTRA_CLIENT_SECRET
+INTRA_REDIRECTION_URL = settings.INTRA_REDIRECTION_URL
+INTRA_ACCES_TOKEN_URL = settings.INTRA_ACCES_TOKEN_URL
+INTRA_AUTHORIZATION_URL = settings.INTRA_AUTHORIZATION_URL
+INTRA_TOKEN_INFO = settings.INTRA_TOKEN_INFO
+INTRA_USER_PASSWORD = settings.INTRA_USER_PASSWORD
 
 
 # Create your views here.
@@ -155,7 +167,6 @@ def list_users(request):
     users = User.objects.all()
     return render(request, 'ausers.html', {'users': users})
 
-
 @login_required(login_url='login')
 def game(request):
     # Logic to play a game and save it to the database
@@ -172,7 +183,73 @@ def game(request):
         'online_users': online_users
         })
 
-        
+
+def redirecturi(request):
+    #get the code we received from the url
+    code = request.GET.get('code')
+    if code:
+        data = {
+            'grant_type' : 'authorization_code',
+            'client_id': INTRA_CLIENT_ID,
+            'client_secret' : INTRA_CLIENT_SECRET,
+            'code' : code,
+            'redirect_uri': INTRA_REDIRECTION_URL,
+        }
+        #get access token
+        response = requests.post(INTRA_ACCES_TOKEN_URL, data=data)
+        if response.status_code == 200:
+            token_data = response.content
+            token = json.loads(token_data)['access_token']
+            token_type = json.loads(token_data)['token_type']
+            meUrl = INTRA_TOKEN_INFO
+            headers = {
+                'Authorization': f'{token_type} {token}'
+            }
+            #make api request with the token
+            meResponse = requests.get(meUrl, headers=headers)
+            content = meResponse.content
+            user_email = json.loads(content)['email']
+            username = json.loads(content)['login']
+            first_name = json.loads(content)['first_name']
+            last_name = json.loads(content)['last_name']
+            avatar = json.loads(content)['avatar']
+            # Check if the user already exists
+            existing_user = User.objects.filter(username=username).first()
+            if existing_user:
+                usera = authenticate(request, username=username, password=INTRA_USER_PASSWORD)
+                login(request, usera)
+                return HttpResponseRedirect(reverse("index"))
+            else:
+                # User doesn't exist, create a new user
+                new_user = User.objects.create_user(username=username, email=user_email, password=INTRA_USER_PASSWORD)
+                new_user.first_name = first_name
+                new_user.last_name = last_name
+                new_user.avatar = avatar
+
+                new_user.save()
+                usera = authenticate(request, username=username, password=INTRA_USER_PASSWORD)
+                login(request, usera)
+                return HttpResponseRedirect(reverse("index"))
+                # Redirect or do something else
+    else:
+        return redirect('index')
+
+
+# @login_required(login_url='login')
+# def email_verification(request):
+#     key = "SecretKeyHeeere"
+#     totp = pyotp.TOTP(key)
+#     code = totp.at(30)
+#     send_mail(
+#         "Subject here",
+#         "Here is the message.",
+#         settings.EMAIL_HOST_USER,
+#         ["boutahriabdelkhalek@gmail.com"],
+#         fail_silently=False,
+#     )
+#     return render(request, 'email.html', {
+#         'code':code
+#     })
 # @api_view(['GET'])  #display the api
 # def apix(request):
 #     Api = api.objects.all() #retrieve all the data from the database 

@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -40,6 +44,7 @@ INSTALLED_APPS = [
     #'django.contrib.postgres',
     'home',
     'users',
+    "sslserver",
 
     #'Pillow'
     # 'rest_framework',
@@ -81,14 +86,14 @@ WSGI_APPLICATION = 'first.wsgi.application'
 
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': BASE_DIR / 'db.sqlite3',
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'abboutah', 
-        'USER': 'abboutah',
-        'PASSWORD': 'abboutah',
-        'HOST': 'localhost', 
-        'PORT': '5432'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+        # 'ENGINE': 'django.db.backends.postgresql',
+        # 'NAME': os.getenv('DB_NAME'), 
+        # 'USER': os.getenv('DB_USER'),
+        # 'PASSWORD': os.getenv('DB_PASSWORD'),
+        # 'HOST': os.getenv('DB_HOST'), 
+        # 'PORT': os.getenv('DB_PORT')
     }
 }
 
@@ -136,4 +141,23 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  #where uploaded files are stored.
 MEDIA_URL = '/media/' #serve media files
+
+
+_DOMAIN = os.getenv('_DOMAIN')
+INTRA_CLIENT_ID = os.getenv('INTRA_CLIENT_ID')
+INTRA_CLIENT_SECRET = os.getenv('INTRA_CLIENT_SECRET')
+INTRA_REDIRECTION_URL = os.getenv('INTRA_REDIRECTION_URL')
+INTRA_ACCES_TOKEN_URL = os.getenv('INTRA_ACCES_TOKEN_URL')
+INTRA_AUTHORIZATION_URL = os.getenv('INTRA_AUTHORIZATION_URL')
+INTRA_TOKEN_INFO  = os.getenv('INTRA_TOKEN_INFO')
+EMAIL_PROVIDER_URL= os.getenv('EMAIL_PROVIDER_URL')
+EMAIL_PROVIDER_KEY= os.getenv('EMAIL_PROVIDER_KEY')
+EMAIL_BACKEND = os.getenv('EMAIL_BACKEND')
+EMAIL_HOST = os.getenv('EMAIL_HOST')
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = os.getenv('EMAIL_PORT')
+MY_EMAIL = os.getenv('MY_EMAIL')
+MY_NAME = os.getenv('MY_NAME')
+INTRA_USER_PASSWORD = os.getenv('INTRA_USER_PASSWORD')
 

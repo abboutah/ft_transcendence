@@ -23,7 +23,7 @@
             <a href="/profile/{{friend}}">{{ friend }}</a> 
         </li>
         {% endfor %}
-        <li>Matches: {{profile.user.matches}}</li>
+        <li>Matches: {{ profile.matches}} </li>
         {% for game in profile.get_games %}
             {% if game.winner.username == game.player1.username %}
             <li>{{ game.player1.username }} 1 vs {{ game.player2.username }} 0 - {{ game.date|date:"F d, Y, H:i" }} </li>
@@ -63,6 +63,6 @@
         {% endfor %}
         </div>
         {% endif %}
-        <a href="{% url 'logout' %}">Log Out</a>
-        <a href="{% url 'game' %}">Play Game</a>
+    <a href="{% url 'logout' %}">Log Out</a>
+    <a href="{% url 'game' %}">Play Game</a>
 {% endblock %}

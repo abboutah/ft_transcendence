@@ -24,6 +24,10 @@ class Profile(models.Model):
     matches = models.IntegerField(blank=True, default=0)
     wins = models.IntegerField(blank=True, default=0)
     losses = models.IntegerField(blank=True, default=0)
+    # date_played = models.DateField()
+    # winner = models.ForeignKey(User, related_name='won_matches', on_delete=models.CASCADE)
+    # loser = models.ForeignKey(User, related_name='lost_matches', on_delete=models.CASCADE)
+    #match1 = Match.objects.create(date_played='2024-02-25', winner=user1, loser=user2)
     #related_name is an attribute that can be used to specify the name of the reverse relation in Django models
     #https://djangocentral.com/understanding-related-name-in-django-models/
     #convert an object into its string, so whenever we print out the profile of user, it will display his username
@@ -63,6 +67,17 @@ class Profile(models.Model):
         self.losses = games.exclude(winner=self.user).count()
         self.matches = games.count()
         self.save()
+    
+    # def play_match(request, match_id):
+    #     # Assuming you have a view that handles playing matches
+    #     match = get_object_or_404(Match, pk=match_id)
+
+    #     # Perform the logic for the match
+
+    #     # Update the date_played field to the current date
+    #     match.date_played = date.today()
+    #     match.save()
+    
 
     # STATUS_CHOICES = (
     #     ('send', 'send'),
