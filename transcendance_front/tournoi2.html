@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/tournoi2.css">
+    <title>Pong Tournament</title>
+</head>
+<!-- <head> -->
+    <!-- <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    
+    <!-- <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #bb3dc8;
+        }
+
+        #gameCanvas {
+            display: none; /* Initially hidden */
+            border: 2px solid #333;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #registrationForm {
+            text-align: center;
+        }
+
+        input[type="text"] {
+            margin: 5px;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 5px 15px;
+        }
+
+        #currentMatchInfo {
+            margin-top: 20px;
+            color: #FFF;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style> -->
+<!-- </head> -->
+<body>
+
+    <div class="GoBack_Logout">
+        <button
+        class="button-previous"
+        onclick="goBack()"><</button>
+        <button class="button-logout"
+        onclick="removeItemFromLocalStorage()">
+        Logout</button>
+    </div>
+
+    <!-- Registration Form -->
+    <div class="container" id="playerInputForm">
+        <!-- <div class="input-box"> -->
+            <input type="text" id="player1" placeholder="Player 1 Alias"><br>
+            
+            <input type="text" id="player2" placeholder="Player 2 Alias"><br>
+            <input type="text" id="player3" placeholder="Player 3 Alias"><br>
+            <input type="text" id="player4" placeholder="Player 4 Alias"><br>
+            <button class="btn_start_tournament" id="startTournamentButton">Start Tournament</button>
+        <!-- </div> -->
+    </div>
+
+    <!-- Match Info Display -->
+    <div id="currentMatchInfo"></div>
+
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
+    
+    <!-- Include the JavaScript file for the game logic -->
+    <script src="tourno.js"></script>
+    <script>
+        function goBack()
+        {
+            window.history.back();
+        }
+        function removeItemFromLocalStorage()
+        {
+            localStorage.removeItem("isLoggedIn");
+            window.location.href = "index.html";
+        }
+    </script>
+</body>
+</html>
