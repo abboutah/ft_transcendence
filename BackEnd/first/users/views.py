@@ -20,6 +20,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 import requests
 import json
+import urllib.request
 
 _DOMAIN = settings._DOMAIN
 INTRA_CLIENT_ID = settings.INTRA_CLIENT_ID
@@ -212,10 +213,23 @@ def redirecturi(request):
             username = json.loads(content)['login']
             first_name = json.loads(content)['first_name']
             last_name = json.loads(content)['last_name']
-            avatar = json.loads(content)['avatar']
+            # avatarx = json.loads(content)['image']
+            # avatar = avatarx['versions']['large']
+            # response = urllib.request.urlopen(avatar)
+            # Create a file object from the fetched image
+            # image_file = File(response)
+            # Create an UploadedImage object and save it
+            # uploaded_image = UploadedImage()
+            # uploaded_image.image.save(url.split("/")[-1], image_file, save=True)  # Save the image with a filename extracted from the URL
+            # Optionally, you can return the UploadedImage object or any other response
             # Check if the user already exists
             existing_user = User.objects.filter(username=username).first()
             if existing_user:
+                # existing_user.first_name = first_name
+                # existing_user.last_name = last_name
+                # existing_user.profile.avatar = "'/media/large_' + username + '.jpg'"
+                # print(avatar)
+                # existing_user.save()
                 usera = authenticate(request, username=username, password=INTRA_USER_PASSWORD)
                 login(request, usera)
                 return HttpResponseRedirect(reverse("index"))
@@ -224,8 +238,8 @@ def redirecturi(request):
                 new_user = User.objects.create_user(username=username, email=user_email, password=INTRA_USER_PASSWORD)
                 new_user.first_name = first_name
                 new_user.last_name = last_name
-                new_user.avatar = avatar
-
+                # new_user.profile.avatar = avatar
+                # print(avatar)
                 new_user.save()
                 usera = authenticate(request, username=username, password=INTRA_USER_PASSWORD)
                 login(request, usera)

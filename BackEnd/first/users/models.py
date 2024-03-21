@@ -3,6 +3,9 @@ from django.contrib.auth.models import User, AbstractUser
 from django import forms
 from PIL import Image
  
+class UploadedImage(models.Model):
+    image = models.ImageField(upload_to='media/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)  # Timestamp for when the image was uploaded
 
 # Create your models here.
 class Profile(models.Model):

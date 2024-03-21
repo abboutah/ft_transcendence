@@ -44,8 +44,9 @@ INSTALLED_APPS = [
     #'django.contrib.postgres',
     'home',
     'users',
-    "sslserver",
-
+    'django_extensions',
+    
+    # "sslserver",
     #'Pillow'
     # 'rest_framework',
 ]
@@ -161,3 +162,16 @@ MY_EMAIL = os.getenv('MY_EMAIL')
 MY_NAME = os.getenv('MY_NAME')
 INTRA_USER_PASSWORD = os.getenv('INTRA_USER_PASSWORD')
 
+# SSL settings
+# SECURE_SSL_REDIRECT = True
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# SECURE_SSL_HOST = None  # Replace with your domain
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
+# SECURE_BROWSER_XSS_FILTER = True
+# SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# # Paths to SSL certificate and private key files
+# SSL_CERTIFICATE = 'cert.pem'
+# SSL_KEY = 'key.pem'
+#python manage.py runserver --cert cert.pem --key key.pem
