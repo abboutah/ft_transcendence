@@ -187,64 +187,59 @@ def game(request):
 
 def redirecturi(request):
     #get the code we received from the url
-    code = request.GET.get('code')
-    if code:
-        data = {
-            'grant_type' : 'authorization_code',
-            'client_id': INTRA_CLIENT_ID,
-            'client_secret' : INTRA_CLIENT_SECRET,
-            'code' : code,
-            'redirect_uri': INTRA_REDIRECTION_URL,
-        }
-        #get access token
-        response = requests.post(INTRA_ACCES_TOKEN_URL, data=data)
-        if response.status_code == 200:
-            token_data = response.content
-            token = json.loads(token_data)['access_token']
-            token_type = json.loads(token_data)['token_type']
-            meUrl = INTRA_TOKEN_INFO
-            headers = {
-                'Authorization': f'{token_type} {token}'
-            }
-            #make api request with the token
-            meResponse = requests.get(meUrl, headers=headers)
-            content = meResponse.content
-            user_email = json.loads(content)['email']
-            username = json.loads(content)['login']
-            first_name = json.loads(content)['first_name']
-            last_name = json.loads(content)['last_name']
-            # avatarx = json.loads(content)['image']
-            # avatar = avatarx['versions']['large']
-            # response = urllib.request.urlopen(avatar)
-            # Create a file object from the fetched image
-            # image_file = File(response)
-            # Create an UploadedImage object and save it
-            # uploaded_image = UploadedImage()
-            # uploaded_image.image.save(url.split("/")[-1], image_file, save=True)  # Save the image with a filename extracted from the URL
-            # Optionally, you can return the UploadedImage object or any other response
-            # Check if the user already exists
-            existing_user = User.objects.filter(username=username).first()
-            if existing_user:
-                # existing_user.first_name = first_name
-                # existing_user.last_name = last_name
-                # existing_user.profile.avatar = "'/media/large_' + username + '.jpg'"
-                # print(avatar)
-                # existing_user.save()
-                usera = authenticate(request, username=username, password=INTRA_USER_PASSWORD)
-                login(request, usera)
-                return HttpResponseRedirect(reverse("index"))
-            else:
+    if request.method == "GET":
+        code = request.GET.get('code')
+        #if the user authorize the application to access they account
+        if code:
+            #exchange the code for an  access token
+            grant_response = requests.post(INTRA_ACCES_TOKEN_URL, data = {
+                'grant_type' : 'authorization_code', 
+                'client_id': INTRA_CLIENT_ID,
+                'client_secret' : INTRA_CLIENT_SECRET,
+                'code' : code, 
+                'redirect_uri': INTRA_REDIRECTION_URL,
+            })
+            if grant_response.status_code == 200:
+                access_token = grant_response.json()["access_token"]
+                #make api request with the token
+                api_request = requests.get(INTRA_TOKEN_INFO, headers = {
+                    "Authorization": f"Bearer {access_token}"
+                    })
+                user_email = api_request.json()['email']
+                username = api_request.json()['login']
+                first_name = api_request.json()['first_name']
+                last_name = api_request.json()['last_name']
+                # avatarx = api_request.json()['image']
+                # avatar = avatarx['versions']['large']
+                # response = urllib.request.urlopen(avatar)
+                # Create a file object from the fetched image
+                # image_file = File(response)
+                # Create an UploadedImage object and save it
+                # uploaded_image = UploadedImage()
+                # uploaded_image.image.save(url.split("/")[-1], image_file, save=True)  # Save the image with a filename extracted from the URL
+                # Optionally, you can return the UploadedImage object or any other response
+                # Check if the user already exists
+                existing_user = User.objects.filter(username=username).first()
+                if existing_user:
+                    # existing_user.first_name = first_name
+                    # existing_user.last_name = last_name
+                    # existing_user.profile.avatar = "'/media/large_' + username + '.jpg'"
+                    # print(avatar)
+                    # existing_user.save()
+                    usera = authenticate(request, username=username, password=INTRA_USER_PASSWORD)
+                    login(request, usera)
+                    return HttpResponseRedirect(reverse("index"))
                 # User doesn't exist, create a new user
-                new_user = User.objects.create_user(username=username, email=user_email, password=INTRA_USER_PASSWORD)
-                new_user.first_name = first_name
-                new_user.last_name = last_name
-                # new_user.profile.avatar = avatar
-                # print(avatar)
-                new_user.save()
-                usera = authenticate(request, username=username, password=INTRA_USER_PASSWORD)
-                login(request, usera)
-                return HttpResponseRedirect(reverse("index"))
-                # Redirect or do something else
+                else:
+                    new_user = User.objects.create_user(username=username, email=user_email, password=INTRA_USER_PASSWORD)
+                    new_user.first_name = first_name
+                    new_user.last_name = last_name
+                    # new_user.profile.avatar = avatar
+                    # print(avatar)
+                    new_user.save()
+                    usera = authenticate(request, username=username, password=INTRA_USER_PASSWORD)
+                    login(request, usera)
+                    return HttpResponseRedirect(reverse("index"))
     else:
         return redirect('index')
 
