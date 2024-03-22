@@ -184,14 +184,16 @@ def game(request):
         'online_users': online_users
         })
 
-
+# Open Authorization, is a standard designed to allow a website 
+# or application to access resources hosted by other web apps on behalf of a user.
 def redirecturi(request):
-    #get the code we received from the url
+    #requests authorization to access service resources from the user
     if request.method == "GET":
         code = request.GET.get('code')
-        #if the user authorize the application to access they account
+        #If the user authorized the request, we recieve an authorization grant
         if code:
             #exchange the code for an  access token
+            #  grants are the set of steps a Client has to perform to get resource access authorization.
             grant_response = requests.post(INTRA_ACCES_TOKEN_URL, data = {
                 'grant_type' : 'authorization_code', 
                 'client_id': INTRA_CLIENT_ID,
@@ -199,47 +201,52 @@ def redirecturi(request):
                 'code' : code, 
                 'redirect_uri': INTRA_REDIRECTION_URL,
             })
+            #if the grant is valid the application is authenticated, and the api issues an access token
             if grant_response.status_code == 200:
+                #Access Token is a piece of data that represents the authorization 
+                # to access resources on behalf of the end-user
                 access_token = grant_response.json()["access_token"]
-                #make api request with the token
+                #make api request with the token to get access to the resources of the user
                 api_request = requests.get(INTRA_TOKEN_INFO, headers = {
                     "Authorization": f"Bearer {access_token}"
                     })
-                user_email = api_request.json()['email']
-                username = api_request.json()['login']
-                first_name = api_request.json()['first_name']
-                last_name = api_request.json()['last_name']
-                # avatarx = api_request.json()['image']
-                # avatar = avatarx['versions']['large']
-                # response = urllib.request.urlopen(avatar)
-                # Create a file object from the fetched image
-                # image_file = File(response)
-                # Create an UploadedImage object and save it
-                # uploaded_image = UploadedImage()
-                # uploaded_image.image.save(url.split("/")[-1], image_file, save=True)  # Save the image with a filename extracted from the URL
-                # Optionally, you can return the UploadedImage object or any other response
-                # Check if the user already exists
-                existing_user = User.objects.filter(username=username).first()
-                if existing_user:
-                    # existing_user.first_name = first_name
-                    # existing_user.last_name = last_name
-                    # existing_user.profile.avatar = "'/media/large_' + username + '.jpg'"
-                    # print(avatar)
-                    # existing_user.save()
-                    usera = authenticate(request, username=username, password=INTRA_USER_PASSWORD)
-                    login(request, usera)
-                    return HttpResponseRedirect(reverse("index"))
-                # User doesn't exist, create a new user
-                else:
-                    new_user = User.objects.create_user(username=username, email=user_email, password=INTRA_USER_PASSWORD)
-                    new_user.first_name = first_name
-                    new_user.last_name = last_name
-                    # new_user.profile.avatar = avatar
-                    # print(avatar)
-                    new_user.save()
-                    usera = authenticate(request, username=username, password=INTRA_USER_PASSWORD)
-                    login(request, usera)
-                    return HttpResponseRedirect(reverse("index"))
+                #if the access token is valid , the api serves the resources
+                if api_request.status_code == 200:
+                    user_email = api_request.json()['email']
+                    username = api_request.json()['login']
+                    first_name = api_request.json()['first_name']
+                    last_name = api_request.json()['last_name']
+                    # avatarx = api_request.json()['image']
+                    # avatar = avatarx['versions']['large']
+                    # response = urllib.request.urlopen(avatar)
+                    # Create a file object from the fetched image
+                    # image_file = File(response)
+                    # Create an UploadedImage object and save it
+                    # uploaded_image = UploadedImage()
+                    # uploaded_image.image.save(url.split("/")[-1], image_file, save=True)  # Save the image with a filename extracted from the URL
+                    # Optionally, you can return the UploadedImage object or any other response
+                    # Check if the user already exists
+                    existing_user = User.objects.filter(username=username).first()
+                    if existing_user:
+                        # existing_user.first_name = first_name
+                        # existing_user.last_name = last_name
+                        # existing_user.profile.avatar = "'/media/large_' + username + '.jpg'"
+                        # print(avatar)
+                        # existing_user.save()
+                        usera = authenticate(request, username=username, password=INTRA_USER_PASSWORD)
+                        login(request, usera)
+                        return HttpResponseRedirect(reverse("index"))
+                    # User doesn't exist, create a new user
+                    else:
+                        new_user = User.objects.create_user(username=username, email=user_email, password=INTRA_USER_PASSWORD)
+                        new_user.first_name = first_name
+                        new_user.last_name = last_name
+                        # new_user.profile.avatar = avatar
+                        # print(avatar)
+                        new_user.save()
+                        usera = authenticate(request, username=username, password=INTRA_USER_PASSWORD)
+                        login(request, usera)
+                        return HttpResponseRedirect(reverse("index"))
     else:
         return redirect('index')
 
