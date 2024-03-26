@@ -22,5 +22,9 @@ RUN python -m pip install --upgrade setuptools wheel
 RUN python -m pip install Pillow
 RUN python -m pip install -r piprequirement.txt
 
+
+EXPOSE 8000
+
 # copy all files into the wdirectory
 COPY . .
+ENTRYPOINT ["sh","script.sh"]
