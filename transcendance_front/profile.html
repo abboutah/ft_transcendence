@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,87 +12,71 @@
 
     <div class="parent-page">
 
-   
-    <div class="parent-profile">
-    <div class="wrapper">
-        <div class="profile-item">
-            <button class="btn-profile">
-                <img class="round" src="/fils/image1.jpg" alt="user" />
-            </button>
-                <img  
-                onclick="window.location.href = 'editeProfileBootstrap.html'"
-                class="edit-profile"
-                src="https://cdn3.iconfinder.com/data/icons/feather-5/24/edit-512.png" alt="edit" />
-        </div>
-        <h3>ACHAQ Abbes</h3>
-        <div class="buttons">
-            <button
-            onclick="window.location.href = '**********.html'"
-            class="primary ghost">
-                Local game
-            </button>
-        </div>
-        <button
-        onclick="window.location.href = 'tournoi2.html'"
-        class="primary ghost">
-            Tournament
-        </button>
-        <button
-        onclick="window.location.href = '***********.html'"
-        class="primary ghost">
-            Play against AI
-        </button>
-        <button
-        onclick="window.location.href = 'tournament_lobby.html'"
-        class="primary ghost">
-            Remote player
-        </button>
-        <button
-        onclick="window.location.href = '***********.html'"
-        class="primary ghost">
-            Stats
-        </button>
-        <!-- <div class="skills">
+
+        <div class="parent-profile">
+            <div class="wrapper">
+                <div class="profile-item">
+                    <button class="btn-profile">
+                        <img class="round" src="/fils/image1.jpg" alt="user" />
+                    </button>
+                    <img onclick="window.location.href = 'editeProfileBootstrap.html'" class="edit-profile"
+                        src="https://cdn3.iconfinder.com/data/icons/feather-5/24/edit-512.png" alt="edit" />
+                </div>
+                <h3>ACHAQ Abbes</h3>
+                <div class="buttons">
+                    <button onclick="window.location.href = '**********.html'" class="primary ghost">
+                        Local game
+                    </button>
+                </div>
+                <button onclick="window.location.href = 'tournoi2.html'" class="primary ghost">
+                    Tournament
+                </button>
+                <button onclick="window.location.href = '***********.html'" class="primary ghost">
+                    Play against AI
+                </button>
+                <button onclick="window.location.href = 'tournament_lobby.html'" class="primary ghost">
+                    Remote player
+                </button>
+                <button onclick="window.location.href = '***********.html'" class="primary ghost">
+                    Stats
+                </button>
+                <!-- <div class="skills">
             <h2>Score</h2>
         </div> -->
-    </div>
-    <!-- <button 
+            </div>
+            <!-- <button 
     onclick="
     goBack()
     "
     class="button-previous">
         <img src="https://img.icons8.com/ios/50/000000/circled-left-2.png" alt="previous" />
     </button> -->
-    <button 
-    onclick="removeItemFromLocalStorage()"
-    class="button-logout">
-        Logout</button>
+            <button onclick="removeItemFromLocalStorage()" class="button-logout">
+                Logout</button>
 
-        <button
-        class="button-previous2"
-        onclick="goForward()">></button>
-</div>
-</div>
+            <button class="button-previous2" onclick="goForward()">></button>
+        </div>
+    </div>
 
-<script>
+    <script>
 
-    // function removedata()
-    // {
-    //     localStorage.removeItem("userName");
-    //     localStorage.removeItem("password");
-    // }
-    function goBack() {
-        window.history.back();
-    }
-    function goForward(){
-        window.history.forward();
-    }
-    function removeItemFromLocalStorage() {
-        localStorage.removeItem("isLoggedIn");
-        window.location.href = "index.html";
-    }
-    removedata();
-</script>
+        function removedata() {
+            localStorage.removeItem("userName");
+            localStorage.removeItem("password");
+        }
+        function goBack() {
+            window.history.back();
+        }
+        function goForward() {
+            window.history.forward();
+        }
+        function removeItemFromLocalStorage() {
+            localStorage.removeItem("isLoggedIn");
+            window.location.href = "index.html"; // pour la roteur a la login page.
+        }
+        // removedata();
+    </script>
 
 </body>
+
 </html>

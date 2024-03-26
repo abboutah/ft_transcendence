@@ -5,11 +5,14 @@ let isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
 
 // Function to handle user login
 
-function setItemToLocalStorage2() {
+const setItemToLocalStorage2 = async () => {
+    // const res = await axios.get('https://randomuser.me/api/');
+    // console.log('res : ', res);
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
     // Stocker le nom d'utilisateur et le mot de passe dans le localStorage
+    // loginUser(username, password);
     localStorage.setItem('username', username);
     localStorage.setItem('password', password);
 
@@ -18,16 +21,18 @@ function setItemToLocalStorage2() {
 }
 
 function loginUser(username, password) {
+    console.log('login function')
     // Perform login logic here (e.g., validate credentials, send request to server)
     // For simplicity, let's assume the login is successful
-    // if (username === 'user' && password === 'password') {
-    //     isLoggedIn = true;
-    //     localStorage.setItem('isLoggedIn', 'true'); // Store the isLoggedIn status in localStorage
-    //     alert('Login successful!');
-    //     loadMainComponent(); // Load main component after successful login
-    // } else {
-    //     alert('Invalid username or password. Please try again.');
-    // }
+    if (username === 'user' && password === 'password') {
+        const res = axios.get('https://randomuser.me/api/');
+        console.log('res : ', res);
+        localStorage.setItem('isLoggedIn', 'true'); // Store the isLoggedIn status in localStorage
+        alert('Login successful!');
+        loadMainComponent(); // Load main component after successful login
+    } else {
+        alert('Invalid username or password. Please try again.');
+    }
 }
 
 // Function to load the main component
@@ -40,10 +45,10 @@ function loadMainComponent() {
         fetch('profile.html')
             .then(response => response.text()) //: C'est une chaîne de promesses. Lorsque la requête fetch réussit, elle convertit la réponse en texte brut.
             .then(html => {
-                document.getElementById('main-content').innerHTML = html;
+                document.getElementById('main-content').innerHTML;
             }) //C'est une autre chaîne de promesses. Elle prend le texte brut de la réponse précédente et l'insère en tant que HTML interne de l'élément ayant l'identifiant "main-content".
             .catch(error => console.error('Error loading main page:', error)); // Cela attrape les erreurs qui surviennent pendant la requête fetch ou le traitement de la réponse, et les journalise dans la console.
-            
+
     }
 }
 
@@ -61,11 +66,14 @@ function loadLoginComponent() {
                 event.preventDefault();
                 // const username = document.getElementById('username').value;
                 // const password = document.getElementById('password').value;
-                // loginUser(username, password);
+                loginUser(username, password);
                 isLoggedIn = true;
                 localStorage.setItem('isLoggedIn', 'true'); // Store the isLoggedIn status in localStorage
                 localStorage.setItem('userName', 'aachaq');
+                
                 setItemToLocalStorage2();
+                let user = localStorage.getItem('username');
+                console.log("userName :" + user);
                 alert('Login successful!');
                 window.location.href = 'profile.html';
             });

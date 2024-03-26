@@ -15,19 +15,15 @@
 
 <body>
 
-    <!-- <script>
-        function setItemToLocalStorage2() {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-    
-            // Stocker le nom d'utilisateur et le mot de passe dans le localStorage
-            localStorage.setItem('username', username);
-            localStorage.setItem('password', password);
-    
-            // Rediriger vers la page de profil
-            window.location.href = 'profile.html';
+    <script>
+        const setItemToLocalStorage = async () => {
+            console.log('here');
+            const res = await axios.get('https://randomuser.me/api/');
+            // console.log(`res4 : ${res.object.results[0].name.first}`);
+            const firstName = res.data.results[0].name.first;
+            console.log("firstName :" + firstName);
         }
-    </script> -->
+    </script>
 
     <script>
         function set_Item_To_Local_Storage() {
@@ -41,9 +37,6 @@
             <h1>Login</h1>
 
 
-
-
-            
             <div class="input-box">
                 <input type="text" id="username" placeholder="Username" required>
                 <i class='bx bxs-user'></i>
@@ -52,11 +45,11 @@
                 <input type="password" id="password" placeholder="Password" required>
                 <i class='bx bxs-lock'></i>
             </div>
-            
+
             <!-- <div class="login_with_intra_42">
                 <a href="#">login with intra 42</a>
             </div> -->
-            <button type="submet" class="btn" onclick="setItemToLocalStorage2()">Login</button>
+            <button type="submet" class="btn" onclick="setItemToLocalStorage()">Login</button>
 
             <div class="register-link">
                 <p>Don't have an account? <a href="RegisterUserBoutstrap.html">Register</a></p>
@@ -64,12 +57,11 @@
         </form>
     </div>
     <div class="wrapper">
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <form id="login-form">
-            <button 
-            onclick="setItemToLocalStorage()"
-            class="btn btn-secondary btn-block">Login with 42 Intra</button>
+            <button onclick="setItemToLocalStorage()" class="btn btn-secondary btn-block">Login with 42 Intra</button>
         </form>
     </div>
 </body>
-</html>
 
+</html>
