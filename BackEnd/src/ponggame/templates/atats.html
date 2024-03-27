@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+</head>
+
+<body>
+
+    <div class="parent-page">
+
+
+    <button 
+    onclick="removeItemFromLocalStorage()"
+    class="button-logout">
+        Logout</button>
+
+        <button
+        class="button-previous2"
+        onclick="goBack()"><</button>
+</div>
+</div>
+
+<script>
+
+    function removedata()
+    {
+        localStorage.removeItem("userName");
+        localStorage.removeItem("password");
+    }
+    function goBack() {
+        window.history.back();
+    }
+    function goForward(){
+        window.history.forward();
+    }
+    function removeItemFromLocalStorage() {
+        localStorage.removeItem("isLoggedIn");
+        window.location.href = "index";
+    }
+    removedata();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!-- login.html -->
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form in HTML and CSS </title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+
+    <script>
+        const setItemToLocalStorage = async () => {
+            console.log('here');
+            const res = await axios.get('https://randomuser.me/api/');
+            // console.log(`res4 : ${res.object.results[0].name.first}`);
+            const firstName = res.data.results[0].name.first;
+            console.log("firstName :" + firstName);
+        }
+    </script>
+
+    <script>
+        function set_Item_To_Local_Storage() {
+            localStorage.setItem('isLoggedIn', 'true');
+            window.location.href = 'profile';
+        }
+    </script>
+
+    <div class="wrapper">
+        <form action="">
+            <h1>Login</h1>
+
+
+            <div class="input-box">
+                <input type="text" id="username" placeholder="Username" required>
+                <i class='bx bxs-user'></i>
+            </div>
+            <div class="input-box">
+                <input type="password" id="password" placeholder="Password" required>
+                <i class='bx bxs-lock'></i>
+            </div>
+
+            <!-- <div class="login_with_intra_42">
+                <a href="#">login with intra 42</a>
+            </div> -->
+            <button type="submet" class="btn" onclick="setItemToLocalStorage()">Login</button>
+
+            <div class="register-link">
+                <p>Don't have an account? <a href="RegisterUserBoutstrap">Register</a></p>
+            </div>
+        </form>
+    </div>
+    <div class="wrapper">
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <form id="login-form">
+            <button onclick="setItemToLocalStorage()" class="btn btn-secondary btn-block">Login with 42 Intra</button>
+        </form>
+    </div>
+</body>
+
+</html>

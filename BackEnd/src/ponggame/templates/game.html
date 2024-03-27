@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game</title>
+    <link rel="stylesheet" href="{% static 'css/game.css' %}">
+</head>
+<body>
+
+<div class="game-content">
+    <h1>Game</h1>
+    <div class="game-description">
+        <p>Welcome to the game! Here, you can play and enjoy exciting gaming experiences.</p>
+    </div>
+    <div class="game-section">
+        <div id="game-container">
+            <canvas id="gameCanvas" width="800" height="600"></canvas>
+            <script src="{% static '2players.js' %}"></script>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'game.js' %}"></script>
+
+</body>
+</html>

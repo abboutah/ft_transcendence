@@ -1,0 +1,25 @@
+/* Style for game content */
+.game-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.game-content h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.game-content p {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Style for game description section */
+.game-description {
+    margin-bottom: 30px;
+}
+
+/* Style for game section */
+/* .game-section { */
+    /* Add styles for your game section here */
+/* } */

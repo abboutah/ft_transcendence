@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming Website</title>
+    <link rel="stylesheet" href="tournament_lobby.css">
+</head>
+
+<body>
+<div class="towFactor">
+    
+    <button onclick="window.location.href = 'tournoi'"
+      class="btn_host_match" type="submit">Host Match</button>
+    <button onclick="window.location.href = 'join_match'"
+     class="btn_join_match" type="submit">Join Match</button>
+</div>
+<button
+        class="button-previous"
+        onclick="goBack()"><</button>
+<button class="button-logout"
+        onclick="removeItemFromLocalStorage()">
+        Logout</button>
+<script>
+    function goBack() {
+        window.history.back();
+    }
+    function removeItemFromLocalStorage() {
+        localStorage.removeItem("isLoggedIn");
+        window.location.href = "index";
+    }
+</script>
+
+</body>
+

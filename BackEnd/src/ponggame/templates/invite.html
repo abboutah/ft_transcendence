@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invite a Friend to Play</title>
+    <link rel="stylesheet" href="{% static 'css/invite.css' %}">
+</head>
+
+<body>
+
+    <div class="GoBack_Logout">
+        <button
+        class="button-previous"
+        onclick="goBack()"><</button>
+        <button
+        class="button-previous2"
+        onclick="goForward()">></button>
+        <button class="button-logout"
+        onclick="removeItemFromLocalStorage()">
+        Logout</button>
+    </div>
+
+    <div class="container">
+        <div class="container-item">
+
+        
+        <h2>Invite a Friend to Play</h2>
+        <!-- list all users with invite button -->
+        <div class="user-list">
+            <div class="user">
+                <p>John Doe</p>
+                <button class="button-invite"
+                    onclick="inviteUser()"
+                >Invite</button>
+            </div>
+            <div class="user">
+                <p>Jane Doe</p>
+                <button class="button-invite"
+                    onclick="inviteUser()"
+                >Invite</button>
+            </div>
+            <div class="user">
+                <p>John Smith</p>
+                <button class="button-invite"
+                    onclick="inviteUser()"
+                >Invite</button>
+            </div>
+            <div class="user">
+                <p>Jane Smith</p>
+                <button class="button-invite"
+                    onclick="inviteUser()"
+                >Invite</button>
+            </div>
+    </div>
+    
+</div>
+
+    
+<script>
+    function inviteUser() {
+        // logic to send invitation
+        alert("Invitation sent!");
+    }
+    function goBack() {
+        window.history.back();
+    }
+    function goForward()
+    {
+        windows.history.goForward();
+    }
+    function removeItemFromLocalStorage() {
+        localStorage.removeItem("isLoggedIn");
+        window.location.href = "index";
+    }
+</script>
+</body>
+</html>
